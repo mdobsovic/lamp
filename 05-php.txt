@@ -1,0 +1,31 @@
+apt install php-fpm
+a2enmod proxy proxy_fcgi setenvif
+
+useradd -d /www/mojastranka -s /bin/false mojastranka-sk
+
+cd /etc/php/8.3/fpm/pool.d
+
+nano mojastranka.sk.conf
+##############################################
+[mojastranka]
+user = mojastranka-sk
+group = mojastranka-sk
+listen = /www/mojastranka/php.sock
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
+pm = dynamic
+pm.max_children = 10
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+chdir = /www/mojastranka
+##############################################
+
+cd /etc/apache2/sites-available
+nano 001-mojastranka.sk.conf
+do VirtualHostu pridat:
+
+    <FilesMatch "\.php$">
+        SetHandler "proxy:unix:/www/mojastranka/php.sock|fcgi://localhost"
+    </FilesMatch>

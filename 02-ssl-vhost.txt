@@ -1,0 +1,14 @@
+<VirtualHost *:443>
+    ServerName mojastranka.sk
+    ServerAlias www.mojastranka.sk
+    DocumentRoot /www/mojastranka/webroot/www
+    ErrorLog ${APACHE_LOG_DIR}/mojastranka.sk-https_error.log
+    CustomLog ${APACHE_LOG_DIR}/mojastranka.sk-https_access.log combined
+    <Directory /www/mojastranka/webroot/www>
+	AllowOverride All
+        Require all granted
+    </Directory>
+    SSLEngine On
+    SSLCertificateFile /etc/ssl/certs/mojastranka.crt
+    SSLCertificateKeyFile /etc/ssl/private/mojastranka.key
+</VirtualHost>

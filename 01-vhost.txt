@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+    ServerName mojastranka.sk
+    ServerAlias www.mojastranka.sk
+    DocumentRoot /www/mojastranka/webroot/www
+    ErrorLog ${APACHE_LOG_DIR}/mojastranka.sk_error.log
+    CustomLog ${APACHE_LOG_DIR}/mojastranka.sk_access.log combined
+    <Directory /www/mojastranka/webroot/www>
+        Require all granted
+    </Directory>
+</VirtualHost>

@@ -1,0 +1,4 @@
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mojastranka.key -out mojastranka.crt -config san.cnf
+
+mv mojastranka.key /etc/ssl/private
+mv mojastranka.crt /etc/ssl/certs
